@@ -5,6 +5,7 @@ import type { MenuItem } from '../../../typings';
 import { isIconUrl } from '../../../utils/isIconUrl';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import LibIcon from '../../../components/LibIcon';
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
   item: MenuItem;
@@ -15,18 +16,19 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    backgroundColor: theme.colors.dark[6],
-    borderRadius: theme.radius.md,
+    backgroundColor: 'rgba(27, 27, 27,1)',
+    
     padding: 2,
     height: 60,
     scrollMargin: 8,
     '&:focus': {
-      backgroundColor: theme.colors.dark[4],
+      backgroundColor: '#248721',
       outline: 'none',
     },
   },
   iconImage: {
     maxWidth: 32,
+    
   },
   buttonWrapper: {
     paddingLeft: 5,
@@ -36,25 +38,26 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
+    
     width: 32,
     height: 32,
   },
   icon: {
     fontSize: 24,
-    color: params.iconColor || theme.colors.dark[2],
+    color: params.iconColor || 'white',
   },
   label: {
-    color: theme.colors.dark[2],
+    color: 'white',
     textTransform: 'uppercase',
     fontSize: 12,
     verticalAlign: 'middle',
   },
   chevronIcon: {
     fontSize: 14,
-    color: theme.colors.dark[2],
+    color: 'white',
   },
   scrollIndexValue: {
-    color: theme.colors.dark[2],
+    color: 'white',
     textTransform: 'uppercase',
     fontSize: 14,
   },
@@ -66,6 +69,9 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     verticalAlign: 'middle',
     marginBottom: 3,
   },
+
+ 
+
 }));
 
 const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index, scrollIndex, checked }, ref) => {
@@ -82,6 +88,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
           return (ref.current = [...ref.current, element]);
       }}
     >
+      
       <Group spacing={15} noWrap className={classes.buttonWrapper}>
         {item.icon && (
           <Box className={classes.iconContainer}>
@@ -96,7 +103,10 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
               />
             )}
           </Box>
+          
         )}
+
+
         {Array.isArray(item.values) ? (
           <Group position="apart" w="100%">
             <Stack spacing={0} justify="space-between">

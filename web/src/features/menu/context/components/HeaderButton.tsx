@@ -11,13 +11,23 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { canClose?: boolean }) => ({
   button: {
-    borderRadius: 4,
-    flex: '1 15%',
-    alignSelf: 'stretch',
-    height: 'auto',
-    textAlign: 'center',
-    justifyContent: 'center',
+    
+
+color: 'white',
+   
+
+
+
+
+    marginLeft: '100px',
+    marginRight: '-100px',
+    height: '40px',
+
+ 
+    
+    clipPath: 'polygon(0 4%, 100% 10%, 100% 90%, 0 100%)',
     padding: 2,
+   
   },
   root: {
     border: 'none',
@@ -32,13 +42,14 @@ const HeaderButton: React.FC<Props> = ({ icon, canClose, iconSize, handleClick }
 
   return (
     <Button
-      variant="default"
+    variant="filled"
       className={classes.button}
       classNames={{ label: classes.label, root: classes.root }}
       disabled={canClose === false}
+     
       onClick={handleClick}
     >
-      <LibIcon icon={icon} fontSize={iconSize} fixedWidth />
+      <LibIcon  style={{color:'white',}} icon={icon} fontSize={iconSize} fixedWidth />
     </Button>
   );
 };

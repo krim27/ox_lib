@@ -7,6 +7,7 @@ import type { InputProps } from '../../typings';
 import { OptionValue } from '../../typings';
 import InputField from './components/fields/input';
 import CheckboxField from './components/fields/checkbox';
+import { Box, createStyles, Flex, Text } from '@mantine/core';
 import SelectField from './components/fields/select';
 import NumberField from './components/fields/number';
 import SliderField from './components/fields/slider';
@@ -15,6 +16,9 @@ import ColorField from './components/fields/color';
 import DateField from './components/fields/date';
 import TextareaField from './components/fields/textarea';
 import TimeField from './components/fields/time';
+
+import ReactMarkdown from 'react-markdown';
+
 import dayjs from 'dayjs';
 
 export type FormValues = {
@@ -23,7 +27,64 @@ export type FormValues = {
   }[];
 };
 
+const useStyles = createStyles((theme) => ({
+  container: {
+    position: 'absolute',
+    top: '15%',
+    right: '25%',
+    width: 320,
+    height: 580,
+    
+  },
+
+  header: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+    gap: 6,
+    
+    
+  },
+  titleContainer: {
+   display: 'inline-block',
+   marginTop: '-55px',
+   marginRight:'150px',
+   position: 'absolute',
+   backgroundColor: '#161616',
+   borderColor: 'rgba(0, 0, 0, 0.2)', // Border color with RGBA values (20% opacity black).
+   borderWidth: '1px', // Border width of 1 pixel.
+   WebkitBoxShadow: 'inset 0px 0px 25px 0px #1b1b20', // Webkit-specific box shadow property.
+   MozBoxShadow: 'inset 0px 0px 25px 0px #32323e', // Moz-specific box shadow property.
+   boxShadow: 'inset 0px 0px 25px 0px #0d380d', // Box shadow property for other browsers.
+    width:'200px',
+    height:'50px',
+    clipPath: 'polygon(0 0, 100% 4%, 100% 96%, 0% 100%)',
+    zIndex: 1,
+  },
+  titleText: {
+    color: 'white',
+   display:'block',
+   marginTop: '2px',
+   fontFamily: 'Bebas Neue',
+    padding: 6,
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  buttonsContainer: {
+    height: 560,
+    
+    overflowY: 'scroll',
+    
+  },
+  buttonsFlexWrapper: {
+    gap: 0.1,
+    backgroundColor: 'rgb(36,135,33)',
+    
+  },
+}));
+
 const InputDialog: React.FC = () => {
+  const { classes } = useStyles();
   const [fields, setFields] = React.useState<InputProps>({
     heading: '',
     rows: [{ type: 'input', label: '' }],
@@ -97,22 +158,35 @@ const InputDialog: React.FC = () => {
 
   return (
     <>
+  
       <Modal
+      
         opened={visible}
         onClose={handleClose}
         centered
         closeOnEscape={fields.options?.allowCancel !== false}
+        style={{background: 'radial-gradient(circle, rgba(19,19,19,0.2539216370141807) 0%, rgba(19,19,19,0.6544818611038166) 50%)',
+      }}
         closeOnClickOutside={false}
         size="xs"
-        styles={{ title: { textAlign: 'center', width: '100%', fontSize: 18 } }}
-        title={fields.heading}
+        styles={{ 
+          title: 
+          { textAlign: 'center', position: 'relative',width: '100%', fontSize: 20,display:'block',marginTop: '-2px',fontFamily: 'Bebas Neue',padding: 6,}
+        }}
+
+       
         withCloseButton={false}
         overlayOpacity={0.5}
+        
         transition="fade"
         exitTransitionDuration={150}
-      >
-        <form onSubmit={onSubmit}>
-          <Stack>
+      >   <Box  className={classes.titleContainer}>  <Text className={classes.titleText}>
+      <ReactMarkdown>{fields.heading}</ReactMarkdown>
+    </Text>
+      </Box>
+        
+        <form  onSubmit={onSubmit}>
+          <Stack> 
             {fieldForm.fields.map((item, index) => {
               const row = fields.rows[index];
               return (
@@ -125,14 +199,16 @@ const InputDialog: React.FC = () => {
                     />
                   )}
                   {row.type === 'checkbox' && (
-                    <CheckboxField
+                    <CheckboxField 
+                    
                       register={form.register(`test.${index}.value`, { required: row.required })}
                       row={row}
+                      
                       index={index}
                     />
                   )}
                   {(row.type === 'select' || row.type === 'multi-select') && (
-                    <SelectField row={row} index={index} control={form.control} />
+                    <SelectField  row={row} index={index} control={form.control} />
                   )}
                   {row.type === 'number' && <NumberField control={form.control} row={row} index={index} />}
                   {row.type === 'slider' && <SliderField control={form.control} row={row} index={index} />}
@@ -154,14 +230,15 @@ const InputDialog: React.FC = () => {
             <Group position="right" spacing={10}>
               <Button
                 uppercase
-                variant="default"
+                variant="light"
                 onClick={() => handleClose()}
                 mr={3}
+                style={{clipPath: 'polygon(0 0, 100% 4%, 100% 96%, 0% 100%)',borderRadius:'1px'}}
                 disabled={fields.options?.allowCancel === false}
               >
                 {locale.ui.cancel}
               </Button>
-              <Button uppercase variant="light" type="submit">
+              <Button uppercase   style={{clipPath: 'polygon(0 5%, 100% 0, 100% 100%, 0 95%)',borderRadius:'1px', }}  type="submit">
                 {locale.ui.confirm}
               </Button>
             </Group>

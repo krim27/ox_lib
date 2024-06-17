@@ -10,7 +10,7 @@ import LibIcon from '../../../components/LibIcon';
 
 const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCount: number; selected: number }) => ({
   tooltip: {
-    backgroundColor: theme.colors.dark[6],
+    
     color: theme.colors.dark[2],
     borderRadius: theme.radius.sm,
     maxWidth: 350,
@@ -18,6 +18,7 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
   },
   container: {
     position: 'absolute',
+    
     pointerEvents: 'none',
     marginTop: params.position === 'top-left' || params.position === 'top-right' ? 5 : 0,
     marginLeft: params.position === 'top-left' || params.position === 'bottom-left' ? 5 : 0,
@@ -34,12 +35,12 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     maxHeight: 415,
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
-    backgroundColor: theme.colors.dark[8],
+    backgroundColor: 'rgb(27, 27, 27)',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
   scrollArrow: {
-    backgroundColor: theme.colors.dark[8],
+    backgroundColor: 'rgb(27, 27, 27)',
     textAlign: 'center',
     borderBottomLeftRadius: theme.radius.md,
     borderBottomRightRadius: theme.radius.md,

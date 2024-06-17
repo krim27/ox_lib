@@ -15,7 +15,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colors.dark[6],
     color: theme.colors.dark[0],
     padding: 12,
-    borderRadius: theme.radius.sm,
+    borderRadius: 10,
     fontFamily: 'Roboto',
     boxShadow: theme.shadows.sm,
   },
@@ -25,13 +25,13 @@ const useStyles = createStyles((theme) => ({
   },
   description: {
     fontSize: 12,
-    color: theme.colors.dark[2],
+    color: "#FFFFFF",
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
   descriptionOnly: {
     fontSize: 14,
-    color: theme.colors.dark[2],
+    color: "#FFFFFF",
     fontFamily: 'Roboto',
     lineHeight: 'normal',
   },
@@ -87,7 +87,7 @@ const Notifications: React.FC = () => {
     const duration = data.duration || 3000;
 
     let iconColor: string;
-    let position = data.position || 'top-right';
+    let position = data.position || 'bottom';
 
     data.showDuration = data.showDuration !== undefined ? data.showDuration : true;
 
